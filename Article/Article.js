@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Reading Horses, Part I: Being With the Horse",
+    date: "Dec 9th, 2019",
+    firstParagraph: "Genre fiction has an ongoing fascination with horse cultures. Sometimes it’s indirect—the Western lives forever in the likes of Firefly and various regions of the Star Wars canon—but it crops up everywhere. Fantasy of course goes all-in for preindustrial worlds, which lean toward animal rather than mechanical transport.",
+    secondParagraph: "And yet most modern readers and writers have little direct experience with actual horses. Of those who do, many may have been near a horse once or maybe ridden one a time or two, but day-to-day, in-depth contact is rare. I suspect that’s why fantasy horses so often act like motorcycles. Motorcycles are easier to comprehend, these days, than horses.",
+    thirdParagraph: "Still, if a reader or writer really wants to get it right, and if that reader or writer loves working in worlds that feature horses as transport and companions, there are ways to fill in at least a few of the gaps. Talking with an experienced horse person. Visiting a stable. Signing up for a ride, whether a riding lesson or a trail ride on a rent-a-horse."
   }
 ];
 
@@ -112,3 +119,49 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createArticle(object) {
+  let container = document.createElement("div");
+  container.classList = "article";
+
+  let articleTitle = document.createElement("h2");
+  articleTitle.textContent = object.title;
+  container.appendChild(articleTitle);
+
+  let articleDate = document.createElement("p");
+  articleDate.classList = "date";
+  articleDate.textContent = object.date;
+  container.appendChild(articleDate);
+
+  let p1 = document.createElement("p");
+  p1.textContent = object.firstParagraph;
+  container.appendChild(p1);
+
+  let p2 = document.createElement("p");
+  p2.textContent = object.secondParagraph;
+  container.appendChild(p2);
+
+  let p3 = document.createElement("p");
+  p3.textContent = object.thirdParagraph;
+  container.appendChild(p3);
+
+  let expandButton = document.createElement("span");
+  expandButton.classList = "expandButton";
+  expandButton.textContent = "Read more";
+  expandButton.addEventListener("click", () => {
+    container.classList.toggle("article-open");
+  })
+  container.appendChild(expandButton);
+
+  return container;
+
+}
+
+let myArticles = data.map((item) => {
+  return createArticle(item);
+  //return item;
+})
+
+myArticles.forEach((item) => {
+  document.querySelector(".articles").appendChild(item);
+})
